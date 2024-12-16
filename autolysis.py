@@ -18,8 +18,12 @@ import matplotlib.pyplot as plt
 from openai import OpenAI
 from tenacity import retry, stop_after_attempt, wait_fixed
 
+api_key=os.getenv("AIPROXY_TOKEN")
 # Initialize OpenAI client with environment variable
-client = OpenAI(base_url="https://aiproxy.sanand.workers.dev/openai/v1")
+client = OpenAI(
+    api_key=api_key,
+    base_url="https://aiproxy.sanand.workers.dev/openai/v1"
+)
 
 # Retry logic for API calls
 @retry(stop=stop_after_attempt(3), wait=wait_fixed(2))
